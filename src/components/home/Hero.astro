@@ -2,10 +2,22 @@
 import Container from '@components/Container.astro';
 import Button from '@components/Button.astro';
 import { cta } from '@data/cta';
+
+// Live combo-chart bars. Heights trend upward (growth); each "breathes" on its
+// own clock so the dashboard feels live. Pure CSS — tiny payload.
+const bars = [
+  { x: 22, h: 46, d: 0.0, dur: 3.6 },
+  { x: 70, h: 64, d: 0.5, dur: 4.2 },
+  { x: 118, h: 56, d: 0.2, dur: 3.9 },
+  { x: 166, h: 88, d: 0.7, dur: 4.4 },
+  { x: 214, h: 106, d: 0.35, dur: 3.7 },
+  { x: 262, h: 134, d: 0.6, dur: 4.1 },
+];
+const barW = 30;
+const baseY = 172;
 ---
 
 <section class="relative overflow-hidden border-b border-line">
-  <!-- atmosphere: faint graph grid + soft green glow -->
   <div
     class="pointer-events-none absolute inset-0 bg-grid opacity-60 [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_72%)]"
   >
@@ -23,15 +35,13 @@ import { cta } from '@data/cta';
     <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
       <!-- Copy -->
       <div>
-        <p class="eyebrow flex items-center gap-2.5">
-          <span class="h-px w-6 bg-brand-500" aria-hidden="true"></span>
-          Data-driven marketing &amp; analytics
-        </p>
-        <h1 class="mt-6 text-[2.75rem] leading-[1.02] font-bold text-ink sm:text-6xl">
-          Analytics powered marketing for <span
-            class="bg-linear-to-r from-brand-500 to-emerald bg-clip-text text-transparent"
-            >real results</span
-          >
+        <p class="eyebrow">Data-driven marketing &amp; analytics</p>
+        <h1 class="mt-6 text-4xl leading-[1.05] font-bold text-ink sm:text-5xl lg:text-6xl">
+          Analytics powered marketing for
+          <span class="sr-only">real results.</span>
+          <span class="mt-2 block text-brand-600" aria-hidden="true">
+            <span id="hero-rotator">real results</span><span class="hero-caret"></span>
+          </span>
         </h1>
         <p class="mt-6 max-w-xl text-lg text-muted">
           We turn insights into sales. From strategy to execution, we help you scale, optimize, and
@@ -51,7 +61,7 @@ import { cta } from '@data/cta';
         </div>
       </div>
 
-      <!-- Dashboard chart card (hero thesis: the line goes up) -->
+      <!-- Live analytics card (hero thesis: the data goes up) -->
       <div class="relative">
         <div class="rounded-2xl border border-line bg-surface p-5 shadow-pop sm:p-6">
           <div class="flex items-center justify-between">
@@ -65,14 +75,18 @@ import { cta } from '@data/cta';
 
           <svg
             class="mt-4 w-full"
-            viewBox="0 0 320 168"
+            viewBox="0 0 320 196"
             fill="none"
             role="img"
-            aria-label="Weekly sales trending upward from 1.7K to 4.2K dollars"
+            aria-label="Live weekly sales chart trending upward from 1.7K to 4.2K dollars"
           >
             <defs>
+              <linearGradient id="addBar" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6cb968"></stop>
+                <stop offset="100%" stop-color="#4fa84a"></stop>
+              </linearGradient>
               <linearGradient id="addArea" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#4fa84a" stop-opacity="0.22"></stop>
+                <stop offset="0%" stop-color="#4fa84a" stop-opacity="0.18"></stop>
                 <stop offset="100%" stop-color="#4fa84a" stop-opacity="0"></stop>
               </linearGradient>
               <linearGradient id="addStroke" x1="0" y1="0" x2="1" y2="0">
@@ -80,24 +94,56 @@ import { cta } from '@data/cta';
                 <stop offset="100%" stop-color="#4fa84a"></stop>
               </linearGradient>
             </defs>
+
+            <!-- gridlines -->
             <g stroke="#e6e6e9" stroke-width="1">
-              <line x1="0" y1="36" x2="320" y2="36"></line>
-              <line x1="0" y1="84" x2="320" y2="84"></line>
-              <line x1="0" y1="132" x2="320" y2="132"></line>
+              <line x1="8" y1="44" x2="312" y2="44"></line>
+              <line x1="8" y1="96" x2="312" y2="96"></line>
+              <line x1="8" y1="148" x2="312" y2="148"></line>
             </g>
+
+            <!-- logo-echo accent stroke (purple, flowing) -->
             <path
-              class="chart-area"
-              d="M8,140 C60,132 78,110 120,112 C168,114 196,86 232,78 C268,70 300,44 312,30 L312,160 L8,160 Z"
+              class="add-accent"
+              d="M14,170 L300,26"
+              stroke="#8a8af0"
+              stroke-width="1.5"
+              stroke-opacity="0.5"
+              stroke-linecap="round"></path>
+
+            <!-- live data bars -->
+            {
+              bars.map((b) => (
+                <rect
+                  class="add-bar"
+                  x={b.x}
+                  y={baseY - b.h}
+                  width={barW}
+                  height={b.h}
+                  rx="4"
+                  fill="url(#addBar)"
+                  style={`--bd:${b.dur}s; animation-delay:${b.d}s`}
+                />
+              ))
+            }
+
+            <!-- trend line + area over the bar tops -->
+            <path
+              class="add-area"
+              d="M37,126 C53,118 69,108 85,108 C101,108 117,118 133,116 C149,114 165,88 181,84 C197,80 213,66 229,66 C245,66 261,46 277,38 L277,172 L37,172 Z"
               fill="url(#addArea)"></path>
             <path
-              class="chart-line"
+              class="add-trend"
               pathLength="1"
-              d="M8,140 C60,132 78,110 120,112 C168,114 196,86 232,78 C268,70 300,44 312,30"
+              d="M37,126 C53,118 69,108 85,108 C101,108 117,118 133,116 C149,114 165,88 181,84 C197,80 213,66 229,66 C245,66 261,46 277,38"
               stroke="url(#addStroke)"
               stroke-width="3"
               stroke-linecap="round"
               stroke-linejoin="round"></path>
-            <circle class="chart-dot" cx="312" cy="30" r="5" fill="#4fa84a" stroke="#ffffff" stroke-width="2"
+
+            <!-- pulsing peak node -->
+            <circle class="add-halo" cx="277" cy="38" r="9" fill="#4fa84a" fill-opacity="0.25"></circle>
+            <circle class="add-peak" cx="277" cy="38" r="5" fill="#4fa84a" stroke="#ffffff" stroke-width="2"
             ></circle>
           </svg>
 
@@ -127,38 +173,166 @@ import { cta } from '@data/cta';
 </section>
 
 <style>
-  .chart-line {
+  /* typewriter caret — code-cursor vibe */
+  .hero-caret {
+    display: inline-block;
+    width: 0.5ch;
+    height: 1em;
+    margin-left: 0.1em;
+    background: currentColor;
+    vertical-align: -0.08em;
+    animation: hero-blink 1.05s step-end infinite;
+  }
+  @keyframes hero-blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* live bars */
+  .add-bar {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: add-bar-osc var(--bd, 4s) ease-in-out infinite alternate;
+  }
+  @keyframes add-bar-osc {
+    from {
+      transform: scaleY(0.74);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  /* trend draw-in */
+  .add-trend {
     stroke-dasharray: 1;
     stroke-dashoffset: 1;
-    animation: add-draw 1.8s 0.25s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  .chart-area {
-    opacity: 0;
-    animation: add-fade 1s 1.5s ease-out forwards;
-  }
-  .chart-dot {
-    opacity: 0;
-    animation: add-fade 0.4s 1.9s ease-out forwards;
+    animation: add-draw 1.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
   @keyframes add-draw {
     to {
       stroke-dashoffset: 0;
     }
   }
+  .add-area {
+    opacity: 0;
+    animation: add-fade 1s 1.4s ease-out forwards;
+  }
   @keyframes add-fade {
     to {
       opacity: 1;
     }
   }
+
+  /* flowing logo-echo accent */
+  .add-accent {
+    stroke-dasharray: 4 7;
+    animation: add-flow 2.4s linear infinite;
+  }
+  @keyframes add-flow {
+    to {
+      stroke-dashoffset: -44;
+    }
+  }
+
+  /* pulsing peak */
+  .add-peak {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: add-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes add-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.18);
+    }
+  }
+  .add-halo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: add-halo 2.4s ease-in-out infinite;
+  }
+  @keyframes add-halo {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.5;
+    }
+    70%,
+    100% {
+      transform: scale(1.9);
+      opacity: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .chart-line {
-      stroke-dashoffset: 0;
+    .hero-caret,
+    .add-bar,
+    .add-trend,
+    .add-area,
+    .add-accent,
+    .add-peak,
+    .add-halo {
       animation: none;
     }
-    .chart-area,
-    .chart-dot {
+    .add-bar {
+      transform: scaleY(1);
+    }
+    .add-trend {
+      stroke-dashoffset: 0;
+    }
+    .add-area {
       opacity: 1;
-      animation: none;
+    }
+    .add-halo {
+      opacity: 0;
     }
   }
 </style>
+
+<script>
+  const el = document.getElementById('hero-rotator');
+  if (el) {
+    const words = ['real results', 'real growth', 'more sales', 'real change', 'real progress'];
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      el.textContent = words[0];
+    } else {
+      let w = 0;
+      let c = words[0].length; // start fully typed (matches SSR content)
+      let deleting = true;
+      const tick = () => {
+        const word = words[w];
+        if (!deleting) {
+          c++;
+          el.textContent = word.slice(0, c);
+          if (c === word.length) {
+            deleting = true;
+            setTimeout(tick, 1500);
+            return;
+          }
+          setTimeout(tick, 75);
+        } else {
+          c--;
+          el.textContent = word.slice(0, Math.max(c, 0));
+          if (c <= 0) {
+            deleting = false;
+            w = (w + 1) % words.length;
+            setTimeout(tick, 260);
+            return;
+          }
+          setTimeout(tick, 38);
+        }
+      };
+      // Hold the server-rendered first word a beat, then start cycling.
+      setTimeout(tick, 1600);
+    }
+  }
+</script>

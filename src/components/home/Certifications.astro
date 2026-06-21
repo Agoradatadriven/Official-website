@@ -1,0 +1,40 @@
+---
+import Container from '@components/Container.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import { certifications } from '@data/certifications';
+---
+
+<section class="border-b border-line bg-surface py-16 lg:py-20">
+  <Container>
+    <SectionHeading eyebrow="Certified expertise" title="Credentials you can verify" align="center">
+      <p class="mt-3 text-muted">
+        Independently verifiable certifications in data science, analytics, and media buying — each
+        links to its public Credly page.
+      </p>
+    </SectionHeading>
+
+    <ul class="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3">
+      {
+        certifications.map((c) => (
+          <li>
+            <a
+              href={c.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full border border-line bg-canvas px-4 py-2 text-sm font-medium text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
+            >
+              <svg class="h-4 w-4 text-brand-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path
+                  fill-rule="evenodd"
+                  d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0l-3.5-3.5a1 1 0 1 1 1.4-1.4l2.8 2.79 6.8-6.79a1 1 0 0 1 1.4 0Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              {c.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Container>
+</section>

@@ -1,0 +1,80 @@
+---
+import Container from '@components/Container.astro';
+import SectionHeading from '@components/SectionHeading.astro';
+import Card from '@components/Card.astro';
+import Button from '@components/Button.astro';
+
+// Real case studies from /agora-portfolio/. Detail pages link through to the
+// portfolio page for now; individual case-study routes land in a later phase.
+const caseStudies = [
+  {
+    title: 'Service-Based & Membership',
+    summary:
+      'A spa & wellness hub: content strategy, geo-targeted ads, and membership campaigns drove a 100% lift in monthly inquiries and 40% more bookings.',
+    tag: 'Spa & Wellness',
+  },
+  {
+    title: 'Community Events',
+    summary:
+      'Brand storytelling and targeted social campaigns built reach and engagement for a community-events client.',
+    tag: 'Events',
+  },
+  {
+    title: 'Digital Products',
+    summary:
+      'Full-funnel marketing and analytics for a digital-products business, from positioning to performance tracking.',
+    tag: 'eCommerce',
+  },
+];
+
+const competitions = [
+  { stat: '2nd / 2,459', label: 'Marketing Analytics — Codebasics Challenge #9' },
+  { stat: '1st place', label: 'Operations Analytics — cash-prize recipient' },
+];
+---
+
+<section class="border-b border-line py-16 lg:py-24">
+  <Container>
+    <div class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+      <SectionHeading eyebrow="Portfolio" title="Real-life results, not just a list of projects">
+        <p class="mt-3 text-muted">
+          Every campaign reflects a challenge we tackled, a strategy we shaped, and the results we
+          delivered.
+        </p>
+      </SectionHeading>
+      <Button href="/agora-portfolio/" variant="secondary">Explore the portfolio</Button>
+    </div>
+
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        caseStudies.map((c) => (
+          <Card class="flex flex-col">
+            <span class="inline-flex w-fit rounded-full bg-tint px-3 py-1 text-xs font-semibold text-brand-700">
+              {c.tag}
+            </span>
+            <h3 class="mt-4 text-xl font-semibold text-ink">{c.title}</h3>
+            <p class="mt-2 flex-1 text-sm text-muted">{c.summary}</p>
+            <a
+              href="/agora-portfolio/"
+              class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
+            >
+              Learn more
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </Card>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+      {
+        competitions.map((c) => (
+          <div class="flex items-center gap-4 rounded-2xl border border-line bg-surface p-6">
+            <div class="text-3xl font-bold text-brand-600">{c.stat}</div>
+            <div class="text-sm text-muted">{c.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/Container.astro';
+
+export const prerender = true;
+const updated = 'June 2026';
+---
+
+<BaseLayout title="Terms & Conditions" description="Terms and conditions for Agora Data Driven." noindex>
+  <Container size="narrow" class="py-16 lg:py-24">
+    <h1 class="text-4xl font-bold text-ink">Terms &amp; Conditions</h1>
+    <p class="mt-2 text-sm text-muted">Last updated: {updated}</p>
+
+    <div
+      class="mt-6 rounded-xl border border-brand-200 bg-tint/50 p-4 text-sm text-ink"
+      role="note"
+    >
+      <strong>Placeholder.</strong> This is template copy to be replaced with Agora Data Driven's finalized
+      terms. Provide the final text and we'll drop it in.
+    </div>
+
+    <div class="mt-8 space-y-6 text-body">
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Using this site</h2>
+        <p class="mt-2 text-muted">
+          By accessing this website you agree to use it lawfully and not to misuse its content. All
+          content is provided for general information.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Engagements</h2>
+        <p class="mt-2 text-muted">
+          Project work is governed by the agreement made for each engagement, including those
+          contracted through our Upwork agency profile.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Contact</h2>
+        <p class="mt-2 text-muted">
+          Questions about these terms? Reach us via our
+          <a class="font-medium text-brand-600 hover:text-brand-700" href="https://www.upwork.com/agencies/1818954484693860352/" target="_blank" rel="noopener noreferrer">Upwork agency profile</a>.
+        </p>
+      </section>
+    </div>
+  </Container>
+</BaseLayout>

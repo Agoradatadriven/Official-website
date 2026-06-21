@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/Container.astro';
+
+export const prerender = true;
+const updated = 'June 2026';
+---
+
+<BaseLayout title="Privacy Policy" description="Privacy policy for Agora Data Driven." noindex>
+  <Container size="narrow" class="py-16 lg:py-24">
+    <h1 class="text-4xl font-bold text-ink">Privacy Policy</h1>
+    <p class="mt-2 text-sm text-muted">Last updated: {updated}</p>
+
+    <div
+      class="mt-6 rounded-xl border border-brand-200 bg-tint/50 p-4 text-sm text-ink"
+      role="note"
+    >
+      <strong>Placeholder.</strong> This is template copy to be replaced with Agora Data Driven's finalized
+      privacy policy. Provide the final text and we'll drop it in.
+    </div>
+
+    <div class="mt-8 space-y-6 text-body">
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Overview</h2>
+        <p class="mt-2 text-muted">
+          This policy explains what information we collect, how we use it, and the choices you have.
+          Agora Data Driven respects your privacy and only collects what is needed to provide and
+          improve our services.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-xl font-semibold text-ink">Information we collect</h2>
+        <p class="mt-2 text-muted">
+          Details you choose to share when contacting us, and standard analytics about how visitors
+          use this website.
+        </p>
+      </section>
+      <section>
+        <h2 class="text-xl font-semibold text-ink">How to reach us</h2>
+        <p class="mt-2 text-muted">
+          Questions about this policy? Contact us through our
+          <a class="font-medium text-brand-600 hover:text-brand-700" href="https://www.upwork.com/agencies/1818954484693860352/" target="_blank" rel="noopener noreferrer">Upwork agency profile</a>.
+        </p>
+      </section>
+    </div>
+  </Container>
+</BaseLayout>

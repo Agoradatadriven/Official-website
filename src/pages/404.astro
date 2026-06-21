@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/Container.astro';
+import Button from '@components/Button.astro';
+
+export const prerender = true;
+---
+
+<BaseLayout title="Page not found" noindex>
+  <Container class="py-24 text-center lg:py-32">
+    <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">404</p>
+    <h1 class="mt-2 text-4xl font-bold text-ink sm:text-5xl">We couldn't find that page</h1>
+    <p class="mx-auto mt-4 max-w-md text-muted">
+      The page may have moved or no longer exists. Let's get you back on track.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <Button href="/" size="lg">Back to home</Button>
+      <Button href="/agora-portfolio/" variant="secondary" size="lg">View our work</Button>
+    </div>
+  </Container>
+</BaseLayout>

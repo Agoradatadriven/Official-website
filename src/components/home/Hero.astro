@@ -11,11 +11,12 @@ import { cta } from '@data/cta';
   >
   </div>
   <div
-    class="pointer-events-none absolute -top-40 -right-32 h-[34rem] w-[34rem] rounded-full bg-brand-300/25 blur-[130px]"
+    class="glow-pulse pointer-events-none absolute -top-40 -right-32 h-[34rem] w-[34rem] rounded-full bg-brand-300/30 blur-[130px]"
   >
   </div>
   <div
-    class="pointer-events-none absolute -bottom-36 left-1/4 h-[22rem] w-[22rem] rounded-full bg-accent-300/15 blur-[120px]"
+    class="glow-pulse pointer-events-none absolute -bottom-36 left-1/4 h-[22rem] w-[22rem] rounded-full bg-accent-300/20 blur-[120px]"
+    style="animation-delay: -4.5s"
   >
   </div>
 
@@ -23,40 +24,77 @@ import { cta } from '@data/cta';
     <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
       <!-- Copy -->
       <div>
-        <p class="eyebrow">Data-driven marketing &amp; analytics</p>
-        <h1 class="mt-6 text-4xl leading-[1.05] font-bold text-ink sm:text-5xl lg:text-6xl">
+        <p
+          class="reveal inline-flex items-center gap-2 rounded-full border border-brand-200 bg-tint/70 py-1.5 pr-4 pl-2.5 text-xs font-semibold tracking-wide text-brand-700 uppercase backdrop-blur"
+        >
+          <span class="grid h-4 w-4 place-items-center rounded-full bg-brand-500" aria-hidden="true">
+            <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+          </span>
+          Data-driven marketing &amp; analytics
+        </p>
+        <h1
+          class="reveal mt-6 text-4xl leading-[1.04] font-bold text-ink sm:text-5xl lg:text-[4rem]"
+          style="--reveal-delay: 80ms"
+        >
           Analytics powered marketing for
           <span class="sr-only">real results.</span>
-          <span class="mt-2 block text-brand-600" aria-hidden="true">
-            <span id="hero-rotator">real results</span><span class="hero-caret"></span>
+          <span class="mt-2 block" aria-hidden="true">
+            <span id="hero-rotator" class="text-gradient">real results</span><span
+              class="hero-caret"></span>
           </span>
         </h1>
-        <p class="mt-6 max-w-xl text-lg text-muted">
+        <p
+          class="reveal mt-6 max-w-xl text-lg text-muted"
+          style="--reveal-delay: 160ms"
+        >
           We turn insights into sales. From strategy to execution, we help you scale, optimize, and
           make smarter decisions—faster. Working with us isn't a cost; it's an investment.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-4">
+        <div class="reveal mt-8 flex flex-wrap gap-4" style="--reveal-delay: 240ms">
           <Button href={cta.becomeClient.href} external size="lg">{cta.becomeClient.label}</Button>
           <Button href={cta.customQuote.href} external variant="secondary" size="lg">
             {cta.customQuote.label}
           </Button>
         </div>
 
-        <div class="mt-8 flex items-center gap-3 text-sm text-muted">
-          <span class="tracking-tight text-brand-500" aria-hidden="true">★★★★★</span>
-          <span><span class="font-semibold text-ink">Top Rated</span> agency on Upwork</span>
+        <div
+          class="reveal mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted"
+          style="--reveal-delay: 320ms"
+        >
+          <span class="flex items-center gap-2">
+            <span class="tracking-tight text-brand-500" aria-hidden="true">★★★★★</span>
+            <span><span class="font-semibold text-ink">Top Rated</span> on Upwork</span>
+          </span>
+          <span class="hidden h-4 w-px bg-line sm:block" aria-hidden="true"></span>
+          <span class="flex items-center gap-2">
+            <span class="font-display font-bold text-ink">9</span> verifiable certifications
+          </span>
+          <span class="hidden h-4 w-px bg-line sm:block" aria-hidden="true"></span>
+          <span class="flex items-center gap-2">
+            <span class="font-display font-bold text-ink">2×</span> award-winning analytics
+          </span>
         </div>
       </div>
 
       <!-- Live ML showcase -->
-      <div class="relative">
+      <div class="reveal relative" style="--reveal-delay: 200ms">
+        <div
+          class="glow-pulse pointer-events-none absolute -inset-6 -z-10 rounded-[2.5rem] bg-brand-300/25 blur-3xl"
+        >
+        </div>
         <HeroViz />
         <div
-          class="absolute -bottom-5 -left-4 hidden rounded-xl border border-line bg-surface px-4 py-3 shadow-card sm:block"
+          class="absolute -bottom-5 -left-4 hidden rounded-xl border border-line bg-surface px-4 py-3 shadow-pop sm:block"
         >
-          <div class="font-display text-sm font-bold text-accent-600">2nd / 2,459</div>
+          <div class="font-display text-sm font-bold text-brand-600">2nd / 2,459</div>
           <div class="text-[0.7rem] text-muted">Marketing analytics comp.</div>
+        </div>
+        <div
+          class="absolute -top-5 -right-3 hidden rounded-xl border border-line bg-surface px-4 py-3 shadow-pop md:block"
+        >
+          <div class="font-display text-sm font-bold text-accent-600">1st place 🏆</div>
+          <div class="text-[0.7rem] text-muted">Operations analytics</div>
         </div>
       </div>
     </div>

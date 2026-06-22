@@ -11,15 +11,18 @@ const year = new Date().getFullYear();
   <Container class="py-14 lg:py-20">
     <!-- Final CTA band -->
     <div
-      class="mb-14 flex flex-col items-start justify-between gap-6 rounded-2xl bg-ink px-7 py-10 text-white sm:px-10 lg:flex-row lg:items-center"
+      class="surface-dark relative mb-14 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-3xl border border-night-600 px-7 py-12 sm:px-10 lg:flex-row lg:items-center"
     >
-      <div>
-        <h2 class="text-2xl font-bold text-white sm:text-3xl">Data Driven Success Starts Today!</h2>
-        <p class="mt-2 max-w-xl text-white/70">
+      <div class="dot-grid-dark pointer-events-none absolute inset-0 opacity-50" aria-hidden="true"></div>
+      <div class="relative">
+        <h2 class="text-2xl font-bold sm:text-3xl">
+          Data driven success <span class="text-gradient-bright">starts today</span>
+        </h2>
+        <p class="mt-2 max-w-xl text-white/65">
           Working with us is not a cost. It's an investment. Let's turn your data into sales.
         </p>
       </div>
-      <Button href={cta.becomeClient.href} external variant="primary" size="lg">
+      <Button href={cta.becomeClient.href} external variant="primary" size="lg" class="relative">
         {cta.becomeClient.label}
       </Button>
     </div>

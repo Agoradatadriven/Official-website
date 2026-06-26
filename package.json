@@ -2,9 +2,14 @@
   "name": "agora-data-driven",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Agoradatadriven/Official-website.git"
+  },
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
@@ -26,6 +31,7 @@
     "astro": "^5"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@tailwindcss/vite": "^4",
     "tailwindcss": "^4",
     "typescript": "^5"

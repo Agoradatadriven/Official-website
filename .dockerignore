@@ -10,5 +10,7 @@ brand
 *.log
 npm-debug.log*
 README.md
-PLAN.md
+docs/
 CLAUDE.md
+
+# Keep package-lock.json IN the build context — the Dockerfile's "npm ci" needs it.

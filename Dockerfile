@@ -4,9 +4,9 @@
 # ---- Build stage ----
 FROM node:22-slim AS build
 WORKDIR /app
-COPY package.json ./
-# No lockfile yet: resolve + install, which also writes package-lock.json.
-RUN npm install
+# Copy manifests first for layer caching; npm ci installs the exact locked tree.
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
 RUN npm run build
 

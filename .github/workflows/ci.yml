@@ -1,12 +1,7 @@
 name: CI
 
-# Install from the lockfile and build on every push to main and every PR into
-# it. This catches build breakage and package.json/lockfile drift.
-#
-# NOTE: `npm run check` and `npm run lint` are intentionally NOT gated yet —
-# the lint toolchain (eslint, prettier + plugins) still needs to be added to
-# devDependencies, and `astro check` currently reports pre-existing type
-# diagnostics. Add those steps here once that follow-up lands.
+# Install from the lockfile, then type-check, lint, and build on every push to
+# main and every PR into it. Catches type/format/build regressions early.
 on:
   push:
     branches: [main]
@@ -27,6 +22,12 @@ jobs:
 
       - name: Install (locked)
         run: npm ci
+
+      - name: Type-check
+        run: npm run check
+
+      - name: Lint + format check
+        run: npm run lint
 
       - name: Build
         run: npm run build
